@@ -10,3 +10,5 @@ speed, as it reduces context switching.
 
 Basically this is just a code design thinking which tries to follow an
 object orientation into the stack structure as well.
+
+The idea is to bypass the kernel and use network hardware directly from userspace process.
