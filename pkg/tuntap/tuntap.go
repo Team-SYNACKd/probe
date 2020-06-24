@@ -7,9 +7,9 @@ import (
 	"github.com/songgao/water"
 )
 
-func prepareTunTapInterface() *water.Interface {
+func PrepareTunInterface() *water.Interface {
 	config := water.Config{
-		DeviceType: water.TAP,
+		DeviceType: water.TUN,
 	}
 	config.Name = "probe"
 
@@ -21,20 +21,11 @@ func prepareTunTapInterface() *water.Interface {
 	return ifce
 }
 
-func TunRead(frame ethernet.Frame) {
-	ifce := prepareTunTapInterface()
-
-	for {
-		frame.Resize(1500)
-		n, err := ifce.Read([]byte(frame))
-		if err != nil {
-			log.Fatal(err)
-		}
-		frame = frame[:n]
-
-		log.Printf("Dst: %s\n", frame.Destination())
-		log.Printf("Src: %s\n", frame.Source())
-		log.Printf("Ethertype: % x\n", frame.Ethertype())
-		log.Printf("Payload: % x\n", frame.Payload())
+func TunRead(ifce *water.Interface, frame ethernet.Frame) int {
+	n, err := ifce.Read([]byte(frame))
+	if err != nil {
+		log.Fatal(err)
 	}
+
+	return n
 }
