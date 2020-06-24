@@ -1,8 +1,12 @@
-package probe
+package main
 
-import "fmt"
-
+import (
+	"github.com/Team-SYNACKd/probe/pkg/tuntap"
+	"github.com/songgao/packets/ethernet"
+)
 
 func main() {
-	fmt.Print("This should be the entry point for the symbolic execution. This creates the binary which lets any application use probe for TCP/IP purposes")
+	var frame ethernet.Frame
+	tuntap.TunRead(frame)
+
 }
