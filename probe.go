@@ -4,7 +4,7 @@ import (
 	"log"
 
 	v4 "github.com/Team-SYNACKd/probe/ip/v4"
-	"github.com/Team-SYNACKd/probe/pkg/tuntap"
+	"github.com/Team-SYNACKd/probe/physical"
 	"github.com/songgao/packets/ethernet"
 )
 
@@ -12,10 +12,10 @@ func receivePackets() {
 	var frame ethernet.Frame
 	frame.Resize(1500)
 
-	ifce := tuntap.PrepareTunInterface()
+	ifce := physical.PrepareTunInterface()
 
 	for {
-		n := tuntap.TunRead(ifce, frame)
+		n := physical.TunRead(ifce, frame)
 		frame = frame[:n]
 
 		//TODO: Should consider only IPv4 frame

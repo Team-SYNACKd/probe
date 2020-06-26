@@ -1,4 +1,4 @@
-package tuntap
+package physical
 
 import (
 	"log"
